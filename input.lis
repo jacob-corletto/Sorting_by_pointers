@@ -1,0 +1,95 @@
+     1                                  extern printf
+     2                                  extern scanf
+     3                                  extern malloc
+     4                                  
+     5                                  global input_array
+     6                                  
+     7                                  segment .data                 
+     8 00000000 256C6600                eight_byte_format db "%lf", 0
+     9                                  
+    10 00000004 256C6400                integer_format db "%ld",0
+    11                                  
+    12 00000008 257300                  floatform db "%s", 0
+    13                                  
+    14                                  segment .bss
+    15                                  ;align 16
+    16                                  
+    17                                  segment .text
+    18                                  input_array:
+    19                                  
+    20 00000000 55                      push rbp                        
+    21 00000001 4889E5                  mov  rbp, rsp
+    22 00000004 53                      push rbx
+    23 00000005 51                      push rcx
+    24 00000006 52                      push rdx
+    25 00000007 56                      push rsi
+    26 00000008 57                      push rdi
+    27 00000009 4150                    push r8
+    28 0000000B 4151                    push r9
+    29 0000000D 4152                    push r10
+    30 0000000F 4153                    push r11
+    31 00000011 4154                    push r12
+    32 00000013 4155                    push r13
+    33 00000015 4156                    push r14
+    34 00000017 4157                    push r15
+    35                                  
+    36 00000019 9C                      pushf
+    37                                  
+    38                                  ;xsave
+    39                                  
+    40 0000001A 4989FE                  mov        r14, rdi ;rdi is the array
+    41 0000001D 4989F7                  mov        r15, rsi ;max limit
+    42 00000020 41BD00000000            mov r13, 0 ;counter
+    43                                  
+    44                                  ;loop in the array
+    45                                  begin: 
+    46 00000026 4D39FD                      cmp r13,r15
+    47 00000029 7D3A                        jge loop_finished
+    48                                  
+    49                                      ;create storage for one new number
+    50 0000002B B800000000                  mov rax, 0
+    51 00000030 BF08000000                  mov rdi, 8
+    52 00000035 E8(00000000)                call malloc
+    53 0000003A 4989C4                      mov r12, rax
+    54                                  
+    55                                      ;get number from user
+    56 0000003D B800000000                  mov rax, 0
+    57 00000042 48BF-                       mov rdi, floatform
+    57 00000044 [0800000000000000] 
+    58 0000004C 4C89E6                      mov rsi, r12
+    59 0000004F E8(00000000)                call scanf
+    60                                  
+    61                                      ;check for -1
+    62 00000054 4898                        cdqe 
+    63 00000056 4883F8FF                    cmp rax,-1
+    64 0000005A 7409                        je loop_finished
+    65                                  
+    66                                      ;move r12 into the spave in malloc
+    67 0000005C 4F8924EE                    mov [r14+r13*8],r12
+    68 00000060 49FFC5                      inc r13
+    69 00000063 EBC1                        jmp begin
+    70                                  
+    71                                  loop_finished:
+    72                                      
+    73 00000065 B807000000                  mov rax, 7
+    74 0000006A BA00000000                  mov rdx, 0
+    75                                      ;xrstor[backup]
+    76 0000006F 4C89E8                      mov rax, r13
+    77                                  
+    78 00000072 9D                      popf  ;Restore rflags
+    79 00000073 415F                    pop r15                                 ;Restore r15
+    80 00000075 415E                    pop r14                                 ;Restore r14
+    81 00000077 415D                    pop r13                                 ;Restore r13
+    82 00000079 415C                    pop r12                                 ;Restore r12
+    83 0000007B 415B                    pop r11                                 ;Restore r11
+    84 0000007D 415A                    pop r10                                 ;Restore r10
+    85 0000007F 4159                    pop r9                                  ;Restore r9
+    86 00000081 4158                    pop r8                                  ;Restore r8
+    87 00000083 5F                      pop rdi                                 ;Restore rdi
+    88 00000084 5E                      pop rsi                                 ;Restore rsi
+    89 00000085 5A                      pop rdx                                 ;Restore rdx
+    90 00000086 59                      pop rcx                                 ;Restore rcx
+    91 00000087 5B                      pop rbx                                 ;Restore rbx
+    92 00000088 5D                      pop rbp                                 ;Restore rbp
+    93                                  
+    94 00000089 C3                      ret

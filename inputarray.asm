@@ -64,7 +64,7 @@ begin:
     je loop_finished
 
     ;move r12 into the spave in malloc
-    mov rax, [r14+r13*8],r12
+    mov [r14+r13*8],r12
     inc r13
     jmp begin
 

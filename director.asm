@@ -10,20 +10,20 @@ extern output_array
 
 global director
 
-.data
-intro db "This program will sort all of your doubles",0,10
+segment .data
+intro db "This program will sort all of your doubles",10,0
 
-input_numbers db "Please enter floating point numbers seperated by whitespave. After the last numeric input enter at lease one more qhitespave and press cntl+d",0,10
+input_numbers db "Please enter floating point numbers seperated by whitespave. After the last numeric input enter at lease one more qhitespave and press cntl+d",10,0
 
 ;to inputarray.asm
 
-show_numbers db "Thank you. You entered these numbers",0,10
+show_numbers db "Thank you. You entered these numbers",10,0
 
 ;to outputarray.cpp
 
-end_of_array db "End of output of array",0,10
+end_of_array db "End of output of array",10,0
 
-data_is_sorted db "The array is being sorted without moving any numbers",0,10
+data_is_sorted db "The array is being sorted without moving any numbers",10,0
 
 ;sortpointers
 
@@ -31,7 +31,7 @@ data_is_sorted db "The array is being sorted without moving any numbers",0,10
 
 ;end_of_array
 
-sent_back_to_caller db "The array will be sent back to the caller function",0,10
+sent_back_to_caller db "The array will be sent back to the caller function",10,0
 
 eight_byte_format db "%lf",0
 
@@ -64,9 +64,9 @@ push       r14
 push	   r15 
 pushf        
 
-mov rax,7
-mov rdx,0
-xsave [backup]           
+;mov rax,7
+;mov rdx,0
+;xsave [backup]           
 
 mov rax, 0
 mov rdi, stringformat
@@ -111,9 +111,9 @@ mov rax, 0
 mov rdi, stringformat
 mov rsi, sent_back_to_caller
 
-mov rax, 7
-mov rdx, 0
-xrstor xmm0, [rsp]
+;mov rax, 7
+;mov rdx, 0
+;xrstor xmm0, [rsp]
 
 popf                                                        
 pop        r15                                              
