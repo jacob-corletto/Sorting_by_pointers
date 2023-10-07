@@ -6,7 +6,8 @@ extern scanf
 extern malloc
 extern input_array
 extern output_array
-;extern sortpointers
+extern sort_array
+extern sortasm
 
 global director
 
@@ -94,22 +95,35 @@ call output_array
 mov rax, 0
 mov rdi, stringformat
 mov rsi, end_of_array
+call printf
 
 mov rax, 0
 mov rdi, stringformat
 mov rsi, data_is_sorted
+call printf
 
 ;sort array
+mov rax, 0
+mov rdi, array
+mov rsi, r13
+call sort_array
+;mov r13,rax
 
 ;output array
+mov rax, 0
+mov rdi, array
+mov rsi, r13
+call output_array
 
 mov rax, 0
 mov rdi, stringformat
 mov rsi, end_of_array
+call printf
 
 mov rax, 0
 mov rdi, stringformat
 mov rsi, sent_back_to_caller
+;call printf
 
 ;mov rax, 7
 ;mov rdx, 0

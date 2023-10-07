@@ -9,7 +9,7 @@ eight_byte_format db "%lf", 0
 
 integer_format db "%ld",0
 
-floatform db "%s", 0
+floatform db "%lf", 0
 
 segment .bss
 ;align 16
@@ -54,7 +54,7 @@ begin:
 
     ;get number from user
     mov rax, 0
-    mov rdi, floatform
+    mov rdi, integer_format
     mov rsi, r12
     call scanf
 
@@ -70,8 +70,8 @@ begin:
 
 loop_finished:
     
-    mov rax, 7
-    mov rdx, 0
+    ;mov rax, 7
+    ;mov rdx, 0
     ;xrstor[backup]
     mov rax, r13
 
