@@ -123,11 +123,19 @@ call printf
 mov rax, 0
 mov rdi, stringformat
 mov rsi, sent_back_to_caller
-;call printf
+call printf
+
+mov [returnarray + 0*8], r13
+mov r11, array
+mov [returnarray + 1*8], r11
 
 ;mov rax, 7
 ;mov rdx, 0
 ;xrstor xmm0, [rsp]
+
+mov rax, returnarray
+;movsd xmm0, [returnarray]
+;movsd xmm1, [returnarray+8]
 
 popf                                                        
 pop        r15                                              

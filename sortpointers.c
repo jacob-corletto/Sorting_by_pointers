@@ -3,8 +3,8 @@
 // double* sort_array(double* arr[], long size);
 
 extern "C"{
-  void sort_array(int* arr[], int size){
-    int *temp;
+  void sort_array(double* arr[], int size){
+    double *temp;
     int swapped;
 
     for(int step = 0; step < size-1; ++step){

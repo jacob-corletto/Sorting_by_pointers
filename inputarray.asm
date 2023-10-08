@@ -54,7 +54,7 @@ begin:
 
     ;get number from user
     mov rax, 0
-    mov rdi, integer_format
+    mov rdi, floatform
     mov rsi, r12
     call scanf
 

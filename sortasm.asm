@@ -46,11 +46,11 @@ begin1:
 		cmp r11, r12
 		jge begin1
 
+		lea r10, [r14 + 8*r12]
 		movsd xmm13, [r10]
+		lea r9, [r14 + 16*r12]
 		movsd xmm12, [r9]
-
-		lea xmm13, [r14 + 8*r12]
-		lea xmm12, [r14 + 16*r12]
+		inc r12
 
 		cmppd xmm13, xmm12
 
@@ -59,10 +59,8 @@ begin1:
 	swap:
 		mov r8, r12
 		sub r8, 1
-		movsd xmm10, [r14 + 16*r8]
-		movsd xmm9, [r14 + 8*r8],
-		movsd xmm10, xmm13
-		movsd xmm9, xmm12
+		lea [r14 + 16*r8], xmm13
+		lea [r14 + 8*r8], xmm12
 
 		jmp begin2
 
