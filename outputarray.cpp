@@ -32,30 +32,12 @@
 //   Language: X86-64
 //   Syntax: Ubuntu 
 //==========================================================================================================
-#include "stdio.h"
+#include <stdio.h>
 #include <iostream>
-using namespace std;
-
-extern "C" {
-  unsigned long* director();
-}
-
-int main() {
-  printf("Welcome to a great program developed by Jacob Corletto \n");
-  
-  unsigned long* returnarray = director();
-
-  int size = (int)returnarray[0];
-
-  double** startptr = (double**)returnarray[1];
-
-  printf("The main function recieved this array\n");
-
-  for (int i = 0; i < size; i++ ){
-    printf("%lf \n",*(startptr[i]));
+extern "C"{
+  void output_array(double* arr[], int size){
+    for (int i = 0; i < size;i++ ){
+      printf("%lf \n",(*arr[i]));
+    }
   }
-
-  printf("Main will keep these and send a zero to the operating system \n");
-
-  return 0;
 }
