@@ -29,7 +29,7 @@ floatform   db "%lf", 0
 
 ;===========================variable declarations==========================================================
 segment .bss
-;nothing
+;backup resb 832
 
 ;===========================Code start=====================================================================
 segment .text
@@ -55,9 +55,9 @@ push        r15
 pushf
 
 ;backup the memory
-mov         rax,7
-mov         rdx,0
-xsave       [backup]  
+;mov         rax,7
+;mov         rdx,0
+;xsave       [backup]  
 
 ;set counter 
 mov         r14, rdi                       ;rdi is the array
@@ -94,26 +94,26 @@ begin:
 loop_finished:
     
     ;restore memory and return count
-    mov         rax, 7
-    mov         rdx, 0
-    xrstor      [backup]
+    ;mov         rax, 7
+    ;mov         rdx, 0
+    ;xrstor      [backup]
     mov         rax, r13
 
 ;16 pops
 popf                                    ;Restore rflags
-pop r15                                 ;Restore r15
-pop r14                                 ;Restore r14
-pop r13                                 ;Restore r13
-pop r12                                 ;Restore r12
-pop r11                                 ;Restore r11
-pop r10                                 ;Restore r10
-pop r9                                  ;Restore r9
-pop r8                                  ;Restore r8
-pop rdi                                 ;Restore rdi
-pop rsi                                 ;Restore rsi
-pop rdx                                 ;Restore rdx
-pop rcx                                 ;Restore rcx
-pop rbx                                 ;Restore rbx
-pop rbp                                 ;Restore rbp
+pop         r15                         ;Restore r15
+pop         r14                         ;Restore r14
+pop         r13                         ;Restore r13
+pop         r12                         ;Restore r12
+pop         r11                         ;Restore r11
+pop         r10                         ;Restore r10
+pop         r9                          ;Restore r9
+pop         r8                          ;Restore r8
+pop         rdi                         ;Restore rdi
+pop         rsi                         ;Restore rsi
+pop         rdx                         ;Restore rdx
+pop         rcx                         ;Restore rcx
+pop         rbx                         ;Restore rbx
+pop         rbp                         ;Restore rbp
 
 ret

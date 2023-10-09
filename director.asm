@@ -11,7 +11,7 @@
 ;<https://www.gnu.org/licenses/>. The copyright holder may be contracted here: jacob.corletto@csu.fullerton.edu
 ;==========================================================================================================
 ;===========================Declarations===================================================================
-number_of_cells EQU 8 						;allocate max number of elements 
+number_of_cells EQU 11 						;allocate max number of elements 
 
 ;Bring in external functions
 extern printf                                               
