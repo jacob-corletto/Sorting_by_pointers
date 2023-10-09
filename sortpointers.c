@@ -14,8 +14,12 @@
 #include <iostream>
 
 extern "C"{
+  void swap(double** a, double** b){
+    double temp = **a;
+    **a = **b;
+    **b = temp;
+  }
   void sort_array(double* arr[], int size){
-    double *temp;
     int swapped;
 
     for(int step = 0; step < size-1; ++step){
@@ -23,9 +27,7 @@ extern "C"{
 
       for (int i = 0; i < size-step-1; ++i){
         if (*arr[i] > *arr[i+1]){
-          temp = arr[i];
-          arr[i] = arr[i+1];
-          arr[i+1] = temp;
+          swap(&arr[i], &arr[i+1]);
 
           swapped =1;
         }
