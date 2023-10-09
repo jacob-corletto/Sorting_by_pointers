@@ -10,7 +10,28 @@
 //A copy of the GNU General Public License v3 has been distributed with this software. If not found it is available here: 
 //<https://www.gnu.org/licenses/>. The copyright holder may be contracted here: jacob.corletto@csu.fullerton.edu
 //==========================================================================================================
-
+//==========================================================================================================
+//Author information
+//   Author name: Jacob Corletto
+//   Author email: Jacob.corletto@csu.fullerton.edu
+//
+//Program information
+//   Program name: Sort by Pointers
+//   Program languages: Main function in C; Director in asm; sort in C; outputarray in C; inputarray in asm;
+//   Date program began: Oct, 1, 2023
+//   Date of last update: Oct, 9, 2023
+//   Comments reorganized: Oct, 9, 2023
+//   Files in the program: Inputarray.asm, director.asm, outputarray.c, sortpointers.c, main.c, r.sh
+//
+//Purpose
+//   The intent of this program is to demonstrate how to order an array of pointers without moving the 
+//   pointers themselves.
+//
+//This file
+//   File name: inputarray.asm
+//   Language: X86-64
+//   Syntax: Ubuntu 
+//==========================================================================================================
 #include "stdio.h"
 using namespace std;
 
