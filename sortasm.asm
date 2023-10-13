@@ -13,6 +13,7 @@
 global sortasm
 
 segment .data
+swapped db 7
 
 segment .bss
 
@@ -47,33 +48,40 @@ begin1:
 	inc r13
 	cmp r13, r15
 	jge done
+	mov rdi, 0
 
 	mov r12, 0
+	mov r11, r15
+	sub r11, 1
 	jmp begin2
 
 	begin2:
-		mov r11, r15
-		sub r11, r13
-		cmp r11, r12
+		sub r11, r15
+		;sub r11, r13
+		cmp r12, r11
 		jge begin1
 
 		lea r10, [r14 + 8*r12]
-		movsd xmm13, [r10]
-		lea r9, [r14 + 16*r12]
-		movsd xmm12, [r9]
+		movsd xmm15, [r10]
 		inc r12
-
-		cmppd xmm13, xmm12
+		lea r9, [r14 + 8*(r12)]
+		movsd xmm14, [r9]
+		ucomisd xmm15, xmm14
 
 		jge swap
 
 	swap:
 		mov r8, r12
+		movsd [r14 + 8*(r8)], xmm15
 		sub r8, 1
-		lea [r14 + 16*r8], xmm13
-		lea [r14 + 8*r8], xmm12
+		movsd [r14 + 8*r8], xmm14
+
+		mov rdi, 1
 
 		jmp begin2
+
+	cmp rdi,0
+	je done
 
 done:
 	mov rax, r13
